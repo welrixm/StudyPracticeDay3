@@ -1,0 +1,72 @@
+﻿<Page x:Class="PracticeStudy.Pages.ProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PracticeStudy.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductPage">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock Margin="5" Style="{StaticResource TxtBlock}">Найти:</TextBlock>
+                    <TextBox Name="TxtSearch"  Style="{StaticResource TextBox}"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock Margin="5" Style="{StaticResource TxtBlock}">Сортировка:</TextBlock>
+                    <ComboBox Name="TxtSort"  Style="{StaticResource ComboBox}">
+                            <ComboBoxItem Content="По возрастанию" Name="CbUp" IsMouseCapturedChanged="CbUp_IsEnabledChanged"></ComboBoxItem>
+                            <ComboBoxItem Content="По убыванию" Name="CbDown" IsMouseCapturedChanged="CbDown_IsEnabledChanged"></ComboBoxItem>
+                        </ComboBox>
+                </StackPanel>
+                </StackPanel>
+                
+                
+                <ListBox x:Name="ListProduct" Background="Transparent" Width="650" BorderBrush="Transparent" Height="350">
+                    <ListBox.ItemTemplate >
+                        <DataTemplate>
+                            <ListBoxItem BorderBrush="Black" Style="{StaticResource LblRed}" Background="White" Width="600">
+                                <ListBoxItem.Resources>
+                                    <Style TargetType="ListBoxItem" x:Key="LblRed">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Product.IsActive}" Value="0">
+                                                <Setter Property="Background" Value="Red"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBoxItem.Resources>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock x:Name="StringImage" Visibility="Hidden" Text="{Binding MainImage, StringFormat=2}"></TextBlock>
+                                    <Image Source="{Binding Text, ElementName=StringImage}" Style="{StaticResource ImgSource}"></Image>
+                                    <TextBlock Text="{Binding Id}" Name="TxtIdProduct" Style="{StaticResource prdctTxtb}"></TextBlock>
+                                    <TextBlock Text="{Binding Name}" Name="TxtNameProduct" Style="{StaticResource prdctTxtb}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Cost}" Style="{StaticResource prdctTxtb}"></TextBlock>
+                                        <TextBlock Text="рублей" Style="{StaticResource prdctTxtb}"></TextBlock>
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding DateOfAddition}" Style="{StaticResource prdctTxtb}"></TextBlock>
+                                        <TextBlock Text="{Binding Description}" Style="{StaticResource prdctTxtb}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Button Name="BtnEdit" Style="{StaticResource Button}" Click="BtnEdit_Click" Content="Редактировать"></Button>
+                                        <Button Name="BtnDelete" Style="{StaticResource Button}" Click="BtnDelete_Click"  Content="Удалить"></Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ListBoxItem>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </StackPanel>
+        </ScrollViewer>
+        
+        
+        
+    </Grid>
+</Page>
